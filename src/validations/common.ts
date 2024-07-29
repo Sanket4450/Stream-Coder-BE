@@ -19,3 +19,7 @@ export const pageAndLimit = {
 }
 
 export const fileTypeValidation = stringReqValidation.valid('file', 'folder')
+
+export const primaryKeyValidation = integerNumberValidation
+
+export const primaryKeyReqValidation = primaryKeyValidation.required()

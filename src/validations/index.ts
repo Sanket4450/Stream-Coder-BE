@@ -1,1 +1,3 @@
-export * from './file'
+import fileValidation from './file'
+
+export { fileValidation }

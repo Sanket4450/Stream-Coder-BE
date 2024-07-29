@@ -1,10 +1,23 @@
 import { Request, Response } from 'express'
 import httpStatus from 'http-status'
 import { errorWrapper } from '../utils/errorWrapper'
-import { fileService } from '../services'
-import { CreateFileDto } from '../interfaces/file'
+import { FileService } from '../services'
+import { CreateFileDto, DeleteFileDto, UpdateFileDto } from '../interfaces'
 import { sendResponse } from '../utils/sendResponse'
 import { MSG } from '../helper/messages'
+
+const fileService = new FileService()
+
+const getFolderStructure = errorWrapper(async (_: Request, res: Response) => {
+  const folderStructure = await fileService.getFolderStructure()
+
+  return sendResponse(
+    res,
+    httpStatus.OK,
+    MSG.FOLDER_STRUCTURE_FETCHED,
+    folderStructure
+  )
+})
 
 const createFile = errorWrapper(async (req: Request, res: Response) => {
   const body: CreateFileDto = req.body
@@ -14,13 +27,25 @@ const createFile = errorWrapper(async (req: Request, res: Response) => {
   return sendResponse(res, httpStatus.OK, MSG.FILE_CREATED)
 })
 
-const getFolderStructure = errorWrapper(async (req: Request, res: Response) => {
-  const folderStructure = await fileService.getFolderStructure()
+const updateFile = errorWrapper(async (req: Request, res: Response) => {
+  const body: UpdateFileDto = req.body
 
-  return sendResponse(res, httpStatus.OK, MSG.FOLDER_STRUCTURE_FETCHED, folderStructure)
+  await fileService.updateFile(parseInt(req.params.id), body)
+
+  return sendResponse(res, httpStatus.OK, MSG.FILE_UPDATED)
+})
+
+const deleteFile = errorWrapper(async (req: Request, res: Response) => {
+  const body: DeleteFileDto = req.body
+
+  await fileService.deleteFile(body)
+
+  return sendResponse(res, httpStatus.OK, MSG.FILE_DELETED)
 })
 
 export default {
-  createFile,
   getFolderStructure,
+  createFile,
+  updateFile,
+  deleteFile,
 }

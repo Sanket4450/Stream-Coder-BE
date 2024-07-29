@@ -1,14 +1,33 @@
 import Joi from 'joi'
 import {
   fileTypeValidation,
-  integerNumberValidation,
+  primaryKeyReqValidation,
+  primaryKeyValidation,
   stringReqValidation,
+  stringValidation,
 } from './common'
 
-export const createFile = {
+const createFile = {
   body: Joi.object({
     type: fileTypeValidation,
     name: stringReqValidation,
-    parent_folder_id: integerNumberValidation,
+    parent_folder_id: primaryKeyValidation,
   }),
 }
+
+const updateFile = {
+  params: Joi.object({
+    id: primaryKeyReqValidation,
+  }),
+  body: Joi.object({
+    name: stringValidation,
+  }),
+}
+
+const deleteFile = {
+  body: Joi.object({
+    id: primaryKeyReqValidation,
+  }),
+}
+
+export default { createFile, updateFile, deleteFile }

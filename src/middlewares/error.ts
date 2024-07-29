@@ -20,11 +20,16 @@ export const errorConverter = (
   next(err)
 }
 
-export const errorHandler = (err: CustomError, _: Request, res: Response) => {
+export const errorHandler = (
+  err: CustomError,
+  _: Request,
+  res: Response,
+  __: NextFunction
+) => {
   const { message, statusCode } = err
 
   if (process.env.NODE_ENV === CONSTANTS.DEV) {
-    Logger.error(err)
+    // Logger.error(err)
   }
 
   const response = {

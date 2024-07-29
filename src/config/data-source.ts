@@ -1,11 +1,11 @@
 import { DataSource } from 'typeorm'
-import { Feature, File, Permission, Role, Room, User } from '../entities'
+import { Feature, File, Permission, Role, Room, User } from '../models'
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
   url: process.env.DATABASE_URL,
-  synchronize: false,
-  logging: true,
+  synchronize: true,
+  logging: false,
   entities: [Feature, File, Permission, Role, Room, User],
   subscribers: [],
   migrations: [],

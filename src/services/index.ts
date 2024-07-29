@@ -1,4 +1,2 @@
-import fileService from './file'
-import redisService from './redis'
-
-export { fileService, redisService }
+export { FileService } from './file'
+export { RedisService } from './redis'

@@ -1,12 +1,20 @@
 import express from 'express'
 import { validate } from '../middlewares/validate'
-import { createFile } from '../validations'
+import { fileValidation } from '../validations'
 import { fileController } from '../controllers'
 
 const router = express.Router()
 
-router.post('/', validate(createFile), fileController.createFile)
-
 router.get('/', fileController.getFolderStructure)
+
+router.post('/', validate(fileValidation.createFile), fileController.createFile)
+
+router.put('/', validate(fileValidation.updateFile), fileController.updateFile)
+
+router.delete(
+  '/',
+  validate(fileValidation.deleteFile),
+  fileController.deleteFile
+)
 
 export default router
