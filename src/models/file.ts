@@ -20,7 +20,7 @@ export class File {
   @Column({ type: 'varchar' })
   name: string
 
-  @Column({ type: 'text', nullable: true, select: false })
+  @Column({ type: 'text', default: '', select: false })
   content: string
 
   @ManyToOne(() => File, (file) => file.children, { nullable: true })

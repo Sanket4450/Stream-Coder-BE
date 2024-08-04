@@ -17,4 +17,6 @@ router.delete(
   fileController.deleteFile
 )
 
+router.get('/:file_id', validate(fileValidation.getFileContent), fileController.getFileContent)
+
 export default router

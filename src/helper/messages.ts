@@ -2,6 +2,7 @@ export const MSG = {
   // error
   INTERNAL_SERVER_ERROR: 'Internal Server Error!',
   FOLDER_NOT_FOUND: 'Folder not found!',
+  FILE_NOT_FOUND: 'File not found!',
   FILE_FOLDER_NOT_FOUND: 'File or Folder not found!',
 
   // success
@@ -9,4 +10,5 @@ export const MSG = {
   FOLDER_STRUCTURE_FETCHED: 'Folder structure fetched successfully',
   FILE_UPDATED: 'File or Folder updated successfully',
   FILE_DELETED: 'File or Folder deleted successfully',
+  FILE_CONTENT_FETCHED: 'File content fetched successfully',
 }

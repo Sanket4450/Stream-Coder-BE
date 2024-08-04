@@ -43,9 +43,18 @@ const deleteFile = errorWrapper(async (req: Request, res: Response) => {
   return sendResponse(res, httpStatus.OK, MSG.FILE_DELETED)
 })
 
+const getFileContent = errorWrapper(async (req: Request, res: Response) => {
+  const { file_id } = req.params
+
+  const file = await fileService.getFileContent(Number(file_id))
+
+  return sendResponse(res, httpStatus.OK, MSG.FILE_CONTENT_FETCHED, file)
+})
+
 export default {
   getFolderStructure,
   createFile,
   updateFile,
   deleteFile,
+  getFileContent,
 }

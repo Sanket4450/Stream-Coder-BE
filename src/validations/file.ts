@@ -30,4 +30,10 @@ const deleteFile = {
   }),
 }
 
-export default { createFile, updateFile, deleteFile }
+const getFileContent = {
+  params: Joi.object({
+    file_id: primaryKeyReqValidation,
+  }),
+}
+
+export default { createFile, updateFile, deleteFile, getFileContent }

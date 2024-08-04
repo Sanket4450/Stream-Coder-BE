@@ -127,4 +127,24 @@ export class FileService {
       )
     }
   }
+
+  public getFileContent = async (id: number) => {
+    try {
+      const file = await this.fileRepository.findOne({
+        where: { id },
+        select: ['id', 'content'],
+      })
+
+      if (!file) {
+        throw new HttpError(MSG.FILE_NOT_FOUND, httpStatus.NOT_FOUND)
+      }
+
+      return file
+    } catch (error) {
+      throw new HttpError(
+        error.message || MSG.INTERNAL_SERVER_ERROR,
+        error.statusCode || httpStatus.INTERNAL_SERVER_ERROR
+      )
+    }
+  }
 }
